@@ -1,0 +1,13 @@
+
+.container{
+    background-color:rgb(7,7,67);
+    /* height:100px; */
+    padding:1rem 0px;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.logo{
+    font-size:30px;
+    font-weight:bold;
+}
