@@ -1,9 +1,11 @@
+"use client"
 
+import {useState} from 'react';
 import Link from 'next/link'
 import styles from './links.module.css'
 import Navlinks from './navLinks/navLinks.jsx'; 
 const Links = () => {
-    
+  const [open,setOpen]=useState(false);
    let links=[
     {'link':'Home',
     'path':'/'
@@ -23,6 +25,7 @@ const Links = () => {
   let session= false;
    let admin = true;
   return (
+    <div className={styles.container}>
     <div className={styles.link}>
         {links.map((e,index)=>{
             return(
@@ -39,6 +42,18 @@ const Links = () => {
           {admin&&(<Navlinks items={{link:'Admin',path:'/admin'}} />)}
           </>)
         }
+    </div>
+    <button className={styles.ToggleButn} onClick={()=>setOpen(prev=>!prev)}>Menu</button>
+    {
+      open && 
+      <div className={styles.mobileLinks}>
+        {
+          links.map((link,index)=>(
+            <Navlinks key={index} items={link}/>
+          ))
+        }
+      </div>
+    }
     </div>
   )
 }

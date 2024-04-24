@@ -4,3 +4,36 @@
     flex-direction:row;
     gap:10px;
 }
+
+.mobileLinks {
+    position:absolute;
+    width: 50%;
+    background-color: var(--bg);
+    right:0;
+    top:70px;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    gap:15px;
+    overflow:hidden;
+  }
+
+  @media (max-width:780px){
+    
+        .link{
+            display:none;
+        }
+  }
+
+  @media(min-width:760px){
+    .link{
+        display:block;
+    }
+    .mobileLinks{
+        display:none;
+    }
+    .ToggleButn{
+        display:none;   
+    }
+  }
