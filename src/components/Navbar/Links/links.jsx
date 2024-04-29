@@ -1,61 +1,71 @@
-"use client"
+"use client";
 
-import {useState} from 'react';
-import Link from 'next/link'
-import styles from './links.module.css'
-import Navlinks from './navLinks/navLinks.jsx'; 
-const Links = () => {
-  const [open,setOpen]=useState(false);
-   let links=[
-    {'link':'Home',
-    'path':'/'
-    },
-    {'link':'About',
-     'path':'/about'
-    },
-    {'link':'Blog',
-    'path':'/blog'
-   },
-   {'link':'Contact',
-   'path':'/contact'
-    }
-   ]
+import { useState } from "react";
+import styles from "./links.module.css";
+import NavLink from "./navLinks/navLinks.jsx";
+import Image from "next/image";
+// import { handleLogout } from "@/lib/action";
 
-  //  TEMP Variables:
-  let session= false;
-   let admin = true;
+const links = [
+  {
+    title: "Homepage",
+    path: "/",
+  },
+  {
+    title: "About",
+    path: "/about",
+  },
+  {
+    title: "Contact",
+    path: "/contact",
+  },
+  {
+    title: "Blog",
+    path: "/blog",
+  },
+];
+
+const Links = ({session}) => {
+  const [open, setOpen] = useState(false);
+
+  // TEMPORARY
+  // const session = true;
+  // const isAdmin = true;
+
   return (
     <div className={styles.container}>
-    <div className={styles.link}>
-        {links.map((e,index)=>{
-            return(
-            // <Link className="" key={index} href={e.path} >{e.link}</Link>
-            <Navlinks key={index} items={e}/>
-          )
-        })}
-        {session ?
-        (<Navlinks items={{link:'Login',path:'/Login'}} />)
-        :
-        (
+      <div className={styles.links}>
+        {links.map((link) => (
+          <NavLink item={link} key={link.title} />
+        ))}
+        {session?.user ? (
           <>
-          <Navlinks items={{link:'Logout',path:'/logout'}} />
-          {admin&&(<Navlinks items={{link:'Admin',path:'/admin'}} />)}
-          </>)
-        }
-    </div>
-    <button className={styles.ToggleButn} onClick={()=>setOpen(prev=>!prev)}>Menu</button>
-    {
-      open && 
-      <div className={styles.mobileLinks}>
-        {
-          links.map((link,index)=>(
-            <Navlinks key={index} items={link}/>
-          ))
-        }
+            {session.user?.isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
+            <form action={handleLogout}>
+              <button className={styles.logout}>Logout</button>
+            </form>
+          </>
+        ) : (
+          <NavLink item={{ title: "Login", path: "/login" }} />
+        )}
       </div>
-    }
+      <Image
+        className={styles.menuButton}
+        src="/menu.png"
+        alt=""
+        width={30}
+        height={30}
+        onClick={() => setOpen((prev) => !prev)}
+      />
+      {open && (
+        <div className={styles.mobileLinks}>
+          {links.map((link) => (
+            <NavLink item={link} key={link.title} />
+          ))}
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Links
+export default Links;

@@ -1,0 +1,21 @@
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+.post{
+    width:30%;
+}
+
+@media screen and (max-width:450px){
+    .post{
+        /* width:90%; */
+        width:10%;
+    }
+}
+
+/* @media(max-width:920px){
+    .post{
+        width:45%;
+    }
+} */
