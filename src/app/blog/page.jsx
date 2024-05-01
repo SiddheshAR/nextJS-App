@@ -1,6 +1,7 @@
 
 import styles from './blog.module.css';
 import PostCard from '@/components/postCard/page.jsx';
+import { getPosts } from "@/lib/data";
 const Blog = async () => {
 
     const resData = async()=>{
@@ -16,6 +17,9 @@ const Blog = async () => {
       }
     } 
     let posts = await resData();
+    let MongoPosts = await getPosts();
+
+    console.log(MongoPosts);
     
   return (
     <div className={styles.container}>

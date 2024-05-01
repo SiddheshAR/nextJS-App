@@ -5,7 +5,7 @@ import Image from 'next/image'
 import styles from './contact.module.css';
 
 import dynamic from 'next/dynamic'
-const HydraTestFn = dynamic(()=>import("@/components/hydrationTest"),{ssr:false});
+const HydraTestFn = dynamic(()=>import("@/components/hydrationTest"),{ssr:true});
 
 const Contact = () => {
   // const [a,setA] = useState(null);
@@ -26,7 +26,7 @@ const Contact = () => {
       {/* <div suppressHydrationWarning>{a}</div> */}
       <form action="" className={styles.form}>
         {/* {a} */}
-        {/* <HydraTestFn/> */}
+        <HydraTestFn/>
         <div supressHydrationWarning>{av}</div>
         <input className={styles.inputForm} type="text" placeholder="Name and Surname" />
         <input  className={styles.inputForm} type="text" placeholder="Email Address" />
